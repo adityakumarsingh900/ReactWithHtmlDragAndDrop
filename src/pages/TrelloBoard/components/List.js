@@ -82,6 +82,7 @@ const List = ({ name, onDelete }) => {
       <Box flex pad="xsmall">
         {cards.map((c) => (
           <Card
+            key={c.name}
             item={c}
             onDelete={handleCardDelete}
             setAllowDroping={setAllowDroping}

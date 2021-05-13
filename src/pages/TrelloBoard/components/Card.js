@@ -10,7 +10,10 @@ const Card = ({ item, onDelete, setAllowDroping }) => {
   };
 
   const handleDragEnd = (evt) => {
-    if (evt.dataTransfer.dropEffect !== "move") return 1;
+    if (evt.dataTransfer.dropEffect !== "move") {
+      setAllowDroping(true);
+      return 1
+    };
     onDelete(item.name);
     setAllowDroping(true);
   };
