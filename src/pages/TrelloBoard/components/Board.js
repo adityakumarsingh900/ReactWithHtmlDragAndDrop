@@ -38,13 +38,22 @@ const TrelloBoard = () => {
 
   return (
     <Box>
-      <Box fill="horizontal" align="end" width="small">
-        <Button
-          primary
-          label="Add List"
-          icon={<Add />}
-          onClick={() => setOpenListLayer(true)}
-        />
+      <Box direction="row">
+        <Box fill="horizontal">
+          A new list can be added to the board by pressing the ADD LIST button
+          present on the right side of the board. A new card can be added to a
+          list via a plus(+) button present at the bottom of each list(inside a
+          list). A card can be dragged from one list and dropped on the second
+          list to make it part of the second list.
+        </Box>
+        <Box align="end">
+          <Button
+            primary
+            label="Add List"
+            icon={<Add />}
+            onClick={() => setOpenListLayer(true)}
+          />
+        </Box>
       </Box>
       <Box fill direction="row">
         {list.map((item) => (

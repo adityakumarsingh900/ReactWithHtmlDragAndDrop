@@ -14,6 +14,7 @@ import {
 const List = ({ name, onDelete }) => {
   const [cards, setCards] = useState([]);
   const [allowDroping, setAllowDroping] = useState(true);
+  const [readyToCatch, setReadyToCatch] = useState(false);
   const [openCardFormLayer, setOpenCardFormLayer] = useState(false);
 
   const handleDrop = (ev) => {
@@ -27,6 +28,7 @@ const List = ({ name, onDelete }) => {
       setCards((oldData) => {
         return [getCardEntity({ ...data }), ...oldData];
       });
+    setReadyToCatch(false);
   };
 
   const handleCardAddition = useCallback(
@@ -63,9 +65,20 @@ const List = ({ name, onDelete }) => {
       margin="small"
       pad="xsmall"
       round="small"
-      border={{ color: "brand" }}
+      elevation={allowDroping && readyToCatch && "xlarge"}
+      border={{
+        color: allowDroping
+          ? readyToCatch
+            ? "green"
+            : "brand"
+          : "status-error",
+      }}
       background="light-2"
-      onDragOver={(evt) => allowDroping && evt.preventDefault()}
+      onDragOver={(evt) => {
+        setReadyToCatch(true);
+        return allowDroping && evt.preventDefault();
+      }}
+      onDragLeave={() => setReadyToCatch(false)}
       onDrop={handleDrop}
     >
       <Box
