@@ -7,7 +7,7 @@ import CardEntity from "../../../entities/card";
 
 function getLocalList() {
     const l = getFromLocalStorage("list");
-    if (!l) return [];
+    if (!l) return [{ name: "Important Things" }, { name: "Things I want to do" }];
     return JSON.parse(l).map(list => new ListEntity(list));
 };
 
@@ -17,7 +17,19 @@ function saveListOnLocal(data) {
 
 function getCardsList(name) {
     const l = getFromLocalStorage(`card_${name}`);
-    if (!l) return [];
+    if (!l) return name === "card_Things I want to do"
+      ? [
+          { name: "Learn Firebase", desc: "integrate this page with APIs" },
+          { name: "Borrow App", desc: "work on idea that Ashu told you" },
+          {
+            name: "Integrate APIs here",
+            desc: "Learn and integrate apis here",
+          },
+        ]
+      : [
+          { name: "sidemenu template", desc: "create sidemenu template" },
+          { name: "Drag Drop resizable dashboard", desc: "publish its demo" },
+        ];
     return JSON.parse(l).map((list) => new CardEntity(list));
 }
 
